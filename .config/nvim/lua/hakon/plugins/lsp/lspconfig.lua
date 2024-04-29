@@ -24,8 +24,6 @@ return {
         { buffer = bufnr, desc = 'Type [D]efinition' })
       vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols,
         { buffer = bufnr, desc = '[D]ocument [S]ymbols' })
-      vim.keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
-        { buffer = bufnr, desc = '[W]orkspace [S]ymbols' })
 
       -- See `:help K` for why this keymap
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover Documentation' })

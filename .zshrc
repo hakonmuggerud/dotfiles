@@ -157,8 +157,18 @@ function fzf_search_specific_dirs {
   fi
 }
 
-# Bind Ctrl+f to the custom fzf search function
+function fzf_search_git_branches {
+  local selected_branch
+  selected_branch=$(git branch --sort=-committerdate | fzf | tr -d ' ')
+
+  if [[ -n $selected_branch ]]; then
+    echo "\n$: git checkout "$selected_branch"\n"
+    git checkout "$selected_branch"
+  fi
+}
+
 bindkey -s ^f "fzf_search_specific_dirs\n"
+bindkey -s ^b "fzf_search_git_branches\n"
 
 export PATH="/Users/hakontm/Library/Python/3.10/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
