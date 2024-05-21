@@ -2,11 +2,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Neovide settings
-vim.g.neovide_scale_factor = 1.1
-vim.o.guifont = "JetBrainsMonoNL Nerd Font"
-vim.g.neovide_transparency = 0.7
-
 vim.opt.wrap = false
 vim.opt.fillchars = { eob = " " }
 
