@@ -27,7 +27,7 @@ dotfiles checkout
 Set the flag `showUntrackedFiles` to no on this specific (local) repository:
 
 ```
-config config --local status.showUntrackedFiles no
+dotfiles config --local status.showUntrackedFiles no
 ```
 
 You can now type config commands to add and update your dotfiles:
