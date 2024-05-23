@@ -35,12 +35,14 @@ bindkey -s ^b "fzf_search_git_branches\n"
 
 
 # =============================
-# env variables
+# env variables and options
 # =============================
 
 export AWS_PROFILE=videocation-main
 export EDITOR=nvim
 export BAT_THEME=catppuccin-mocha
+
+bindkey -v
 
 
 # =============================
@@ -75,4 +77,33 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias cat="bat"
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions --group-directories-first"
+
+
+# =============================
+# plugins
+# =============================
+
+ZPLUGINDIR=$HOME/.zsh/plugins
+
+if [[ ! -d $ZPLUGINDIR/zsh-autosuggestions ]]; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions $ZPLUGINDIR/zsh-autosuggestions
+fi
+source $ZPLUGINDIR/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+
+if [[ ! -d $ZPLUGINDIR/zsh-syntax-highlighting ]]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZPLUGINDIR/zsh-syntax-highlighting
+fi
+source $ZPLUGINDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+if [[ ! -d $ZPLUGINDIR/zsh-vi-mode ]]; then
+  git clone https://github.com/jeffreytse/zsh-vi-mode $ZPLUGINDIR/zsh-vi-mode
+fi
+source $ZPLUGINDIR/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+
+# =============================
+# super important scripts
+# =============================
+
+neofetch
 
