@@ -3,6 +3,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 vim.opt.wrap = false
+vim.opt.scrolloff = 10
 vim.opt.fillchars = { eob = " " }
 
 -- Set highlight on search
