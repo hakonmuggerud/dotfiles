@@ -42,7 +42,8 @@ export AWS_PROFILE=videocation-main
 export EDITOR=nvim
 export BAT_THEME=catppuccin-mocha
 
-bindkey -v
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
 
 
 # =============================
@@ -94,12 +95,6 @@ if [[ ! -d $ZPLUGINDIR/zsh-syntax-highlighting ]]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZPLUGINDIR/zsh-syntax-highlighting
 fi
 source $ZPLUGINDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-if [[ ! -d $ZPLUGINDIR/zsh-vi-mode ]]; then
-  git clone https://github.com/jeffreytse/zsh-vi-mode $ZPLUGINDIR/zsh-vi-mode
-fi
-source $ZPLUGINDIR/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
 
 # =============================
 # super important scripts
