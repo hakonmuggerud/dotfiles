@@ -45,6 +45,8 @@ export BAT_THEME=catppuccin-mocha
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
 
+bindkey -e
+
 
 # =============================
 # aliases
@@ -96,7 +98,7 @@ if [[ ! -d $ZPLUGINDIR/zsh-syntax-highlighting ]]; then
 fi
 source $ZPLUGINDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-if [[ ! -d $ZPLUGINDIR/.zsh-autopair ]]; then
+if [[ ! -d $ZPLUGINDIR/zsh-autopair ]]; then
   git clone https://github.com/hlissner/zsh-autopair $ZPLUGINDIR/zsh-autopair
 fi
 source $ZPLUGINDIR/zsh-autopair/autopair.zsh
