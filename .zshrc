@@ -42,6 +42,11 @@ export AWS_PROFILE=videocation-main
 export EDITOR=nvim
 export BAT_THEME=catppuccin-mocha
 
+export HISTFILE=~/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+setopt INC_APPEND_HISTORY_TIME
+
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
 
@@ -92,6 +97,7 @@ if [[ ! -d $ZPLUGINDIR/zsh-autosuggestions ]]; then
   git clone https://github.com/zsh-users/zsh-autosuggestions $ZPLUGINDIR/zsh-autosuggestions
 fi
 source $ZPLUGINDIR/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+bindkey '^y' autosuggest-accept
 
 if [[ ! -d $ZPLUGINDIR/zsh-syntax-highlighting ]]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZPLUGINDIR/zsh-syntax-highlighting
