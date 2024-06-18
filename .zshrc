@@ -7,34 +7,6 @@ PS1="${NEWLINE}${NEWLINE} %B%K{magenta}%F{black} %~ %f%k %F{magenta}>%f%b "
 
 
 # =============================
-# fzf configuration
-# =============================
-eval "$(fzf --zsh)"
-
-function fzf_search_specific_dirs {
-  local selected_dir
-  selected_dir=$(find ~/repos ~/repos/rust-beginnings -maxdepth 1 -type d | fzf)
-
-  if [[ -n $selected_dir ]]; then
-    cd "$selected_dir" || return
-  fi
-}
-
-function fzf_search_git_branches {
-  local selected_branch
-  selected_branch=$(git branch --sort=-committerdate | fzf | tr -d ' ')
-
-  if [[ -n $selected_branch ]]; then
-    echo "\n$: git checkout "$selected_branch"\n"
-    git checkout "$selected_branch"
-  fi
-}
-
-bindkey -s ^f "fzf_search_specific_dirs\n"
-bindkey -s ^b "fzf_search_git_branches\n"
-
-
-# =============================
 # env variables and options
 # =============================
 
@@ -116,4 +88,32 @@ autopair-init
 # =============================
 
 neofetch
+
+
+# =============================
+# fzf configuration
+# =============================
+eval "$(fzf --zsh)"
+
+function fzf_search_specific_dirs {
+  local selected_dir
+  selected_dir=$(find ~/repos ~/repos/rust-beginnings -maxdepth 1 -type d | fzf)
+
+  if [[ -n $selected_dir ]]; then
+    cd "$selected_dir" || return
+  fi
+}
+
+function fzf_search_git_branches {
+  local selected_branch
+  selected_branch=$(git branch --sort=-committerdate | fzf | tr -d ' ')
+
+  if [[ -n $selected_branch ]]; then
+    echo "\n$: git checkout "$selected_branch"\n"
+    git checkout "$selected_branch"
+  fi
+}
+
+bindkey -s ^f "fzf_search_specific_dirs\n"
+bindkey -s ^b "fzf_search_git_branches\n"
 
