@@ -14,8 +14,9 @@ return {
     },
   },
   config = function()
-    vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-    vim.keymap.set('n', '<leader><space>', function ()
+    vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles,
+      { desc = '[?] Find recently opened files' })
+    vim.keymap.set('n', '<leader><space>', function()
       local finders = require('telescope.finders')
       local pickers = require('telescope.pickers')
       local conf = require('telescope.config').values
@@ -23,40 +24,40 @@ return {
       local action_state = require('telescope.actions.state')
 
       local function get_modified_buffers()
-          local buffers = vim.api.nvim_list_bufs()
-          local modified_buffers = {}
+        local buffers = vim.api.nvim_list_bufs()
+        local modified_buffers = {}
 
-          for _, buf in ipairs(buffers) do
-              if vim.api.nvim_buf_get_option(buf, 'modified') then
-                  local bufname = vim.api.nvim_buf_get_name(buf)
-                  if bufname == "" then bufname = "[No Name]" end
-                  table.insert(modified_buffers, bufname)
-              end
+        for _, buf in ipairs(buffers) do
+          if vim.api.nvim_buf_get_option(buf, 'modified') then
+            local bufname = vim.api.nvim_buf_get_name(buf)
+            if bufname == "" then bufname = "[No Name]" end
+            table.insert(modified_buffers, bufname)
           end
+        end
 
-          return modified_buffers
+        return modified_buffers
       end
 
       local function open_modified_buffer(prompt_bufnr)
-          local selection = action_state.get_selected_entry()
-          actions.close(prompt_bufnr)
-          if selection then
-              vim.cmd('e ' .. selection[1])
-          end
+        local selection = action_state.get_selected_entry()
+        actions.close(prompt_bufnr)
+        if selection then
+          vim.cmd('e ' .. selection[1])
+        end
       end
 
       pickers.new({}, {
-          prompt_title = 'Modified Buffers',
-          finder = finders.new_table({
-              results = get_modified_buffers(),
-          }),
-          sorter = conf.generic_sorter({}),
-          attach_mappings = function(prompt_bufnr, map)
-              actions.select_default:replace(function()
-                  open_modified_buffer(prompt_bufnr)
-              end)
-              return true
-          end,
+        prompt_title = 'Modified Buffers',
+        finder = finders.new_table({
+          results = get_modified_buffers(),
+        }),
+        sorter = conf.generic_sorter({}),
+        attach_mappings = function(prompt_bufnr, map)
+          actions.select_default:replace(function()
+            open_modified_buffer(prompt_bufnr)
+          end)
+          return true
+        end,
       }):find()
     end, { desc = '[ ] Find existing buffers' })
     vim.keymap.set('n', '<leader>/', function()

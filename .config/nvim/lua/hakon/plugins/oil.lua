@@ -5,7 +5,13 @@ return {
   config = function()
     require('oil').setup({
       keymaps = {
-        ['<C-h>'] = false
+        ['<C-h>'] = false,
+        ['q'] = function()
+          vim.cmd('close')
+        end
+      },
+      view_options = {
+        show_hidden = true
       }
     })
 
