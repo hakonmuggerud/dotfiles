@@ -1,10 +1,10 @@
 return {
   'williamboman/mason.nvim',
-  dependencies ={
+  dependencies = {
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
   },
-  config = function ()
+  config = function()
     local mason = require('mason')
     local mason_lspconfig = require('mason-lspconfig')
     local mason_tool_installer = require('mason-tool-installer')
@@ -20,11 +20,13 @@ return {
     })
 
     mason_lspconfig.setup({
-      ensure_installed ={
+      ensure_installed = {
         'eslint',
         'html',
         'lua_ls',
         'rust_analyzer',
+        'svelte',
+        'tsserver',
       }
     })
 
