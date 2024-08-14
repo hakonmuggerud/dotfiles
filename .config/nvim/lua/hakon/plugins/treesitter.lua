@@ -14,6 +14,7 @@ return {
           'go',
           'cpp',
           'graphql',
+          'html',
           'javascript',
           'lua',
           'markdown',
