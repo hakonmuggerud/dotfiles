@@ -116,6 +116,11 @@ config.keys = {
         action = wezterm.action.SplitHorizontal({ domain = 'CurrentPaneDomain' })
     },
     {
+        key = "m",
+        mods = "LEADER",
+        action = wezterm.action.TogglePaneZoomState
+    },
+    {
         key = 'h',
         mods = 'CTRL',
         action = wezterm.action.ActivatePaneDirection('Left'),
