@@ -10,6 +10,10 @@ PS1="${NEWLINE}${NEWLINE} %B%K{magenta}%F{black} %~ %f%k %F{magenta}>%f%b "
 # env variables and options
 # =============================
 
+if [[ ! -d $HOME/.env ]]; then
+  source $HOME/.env
+fi
+
 export AWS_PROFILE=videocation-main
 export EDITOR=nvim
 export BAT_THEME=catppuccin-mocha
