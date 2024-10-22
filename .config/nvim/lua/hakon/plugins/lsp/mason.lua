@@ -26,7 +26,7 @@ return {
         'lua_ls',
         'rust_analyzer',
         'svelte',
-        'tsserver',
+        'ts_ls',
       }
     })
 
