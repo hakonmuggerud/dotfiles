@@ -1,3 +1,5 @@
+require('hakon.globals')
+
 return {
   -- Set lualine as statusline
   'nvim-lualine/lualine.nvim',
@@ -5,7 +7,7 @@ return {
   config = function()
     require('lualine').setup({
       options = {
-        theme = 'catppuccin',
+        theme = COLORSCHEME,
       },
       sections = {
         lualine_a = {
