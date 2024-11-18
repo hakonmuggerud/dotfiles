@@ -16,7 +16,7 @@ fi
 # env variables and options
 # =============================
 
-if [[ ! -d $HOME/.env ]]; then
+if [[ -d $HOME/.env ]]; then
   source $HOME/.env
 fi
 
