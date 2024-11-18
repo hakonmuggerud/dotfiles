@@ -1,4 +1,4 @@
-local wezterm = require "wezterm"
+local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 local function is_vim(pane)
@@ -33,39 +33,62 @@ local function split_nav(resize_or_move, key)
     }
 end
 
-config.color_scheme = "Catppuccin Mocha"
-config.window_background_opacity = 0.96
-config.window_decorations = "RESIZE"
-
-config.use_fancy_tab_bar = false
-config.colors = {
-    tab_bar = {
+local themes = {
+    {
+        color_scheme = 'Catppuccin Mocha',
+        font_size = 16,
         background = '#1e1e2e',
         active_tab = {
-            bg_color = '#f5c2e7',
-            fg_color = '#111111',
+            bg = '#f5c2e7',
+            fg = '#111111'
+        }
+    },
+    {
+        color_scheme = 'Gruvbox dark, medium (base16)',
+        font_size = 13,
+        background = '#282828',
+        active_tab = {
+            bg = '#b8bb26',
+            fg = '#111111',
         },
     }
 }
 
-config.font_size = 16
-config.font = wezterm.font({ family = "FiraMono Nerd Font" })
+local theme = themes[2]
+
+config.color_scheme = theme.color_scheme
+config.window_background_opacity = 0.96
+config.window_decorations = 'RESIZE'
+
+config.use_fancy_tab_bar = false
+config.colors = {
+    tab_bar = {
+        background = theme.background,
+        active_tab = {
+            bg_color = theme.active_tab.bg,
+            fg_color = theme.active_tab.fg,
+        },
+    }
+}
+
+config.font_size = theme.font_size
+config.font = wezterm.font({ family = 'FiraMono Nerd Font' })
 config.bold_brightens_ansi_colors = true
 config.font_rules = {
     {
-        intensity = "Bold",
+        intensity = 'Bold',
         italic = true,
-        font = wezterm.font({ family = "Maple Mono", weight = "Bold", style = "Italic" }),
+        font = wezterm.font({ family = 'Maple Mono', weight = 'Bold', style = 'Italic' }),
     },
     {
         italic = true,
-        intensity = "Half",
-        font = wezterm.font({ family = "Maple Mono", weight = "DemiBold", style = "Italic" }),
+        intensity = 'Half',
+        font = wezterm.font({ family = 'Maple Mono', weight = 'DemiBold', style = 'Italic' }),
     },
     {
         italic = true,
-        intensity = "Normal",
-        font = wezterm.font({ family = "Maple Mono", style = "Italic" }),
+        intensity = 'Normal',
+        font = wezterm.font({ family = 'Maple Mono', style = 'Italic' }),
     },
 }
 
@@ -101,18 +124,28 @@ config.keys = {
         },
     },
     {
-        key = "Backspace",
-        mods = "CMD",
-        action = wezterm.action.SendString("\x15"),
+        key = 'Backspace',
+        mods = 'CMD',
+        action = wezterm.action.SendString('\x15'),
     },
     {
-        key = "-",
-        mods = "LEADER",
+        key = 'Backspace',
+        mods = 'ALT',
+        action = wezterm.action.SendString('\x15'),
+    },
+    {
+        key = 't',
+        mods = 'CTRL',
+        action = wezterm.action.SpawnTab('CurrentPaneDomain'),
+    },
+    {
+        key = '-',
+        mods = 'LEADER',
         action = wezterm.action.SplitVertical({ domain = 'CurrentPaneDomain' })
     },
     {
-        key = "|",
-        mods = "LEADER",
+        key = '|',
+        mods = 'LEADER',
         action = wezterm.action.SplitHorizontal({ domain = 'CurrentPaneDomain' })
     },
     {
