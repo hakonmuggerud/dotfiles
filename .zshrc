@@ -1,9 +1,15 @@
 # =============================
 # prompt
 # =============================
+THEME=$"gruvbox-dark"
+
 setopt PROMPT_SUBST
 NEWLINE=$'\n'
-PS1="${NEWLINE}${NEWLINE} %B%K{magenta}%F{black} %~ %f%k %F{magenta}>%f%b "
+PS1="${NEWLINE}${NEWLINE} %B%K{green}%F{black} %~ %f%k %F{green}>%f%b "
+
+if [[ "$THEME" = "catppuccin-mocha" ]]; then
+  PS1="${NEWLINE}${NEWLINE} %B%K{magenta}%F{black} %~ %f%k %F{magenta}>%f%b "
+fi
 
 
 # =============================
@@ -14,9 +20,14 @@ if [[ ! -d $HOME/.env ]]; then
   source $HOME/.env
 fi
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    export PATH="$HOME/bin:$PATH"
+fi
+
 export AWS_PROFILE=videocation-main
 export EDITOR=nvim
-export BAT_THEME=catppuccin-mocha
+export BAT_THEME=gruvbox-dark
 
 export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
@@ -59,8 +70,9 @@ alias gq="git checkout qa-test"
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+alias bat="batcat"
 alias cat="bat"
-alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions --group-directories-first"
+alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --group-directories-first"
 
 
 # =============================
@@ -92,8 +104,8 @@ autopair-init
 # =============================
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 neofetch
 
@@ -101,6 +113,12 @@ neofetch
 # =============================
 # fzf configuration
 # =============================
+if [[ -d "$HOME/.fzf/bin" ]]; then
+  if [[ ! "$PATH" == "*$HOME/.fzf/bin*" ]]; then
+    PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
+  fi
+fi
+
 eval "$(fzf --zsh)"
 
 function fzf_search_specific_dirs {
@@ -125,3 +143,6 @@ function fzf_search_git_branches {
 bindkey -s ^f "fzf_search_specific_dirs\n"
 bindkey -s ^b "fzf_search_git_branches\n"
 
+if [[ "$(tty)" = "/dev/tty1" ]]; then
+  exec startx
+fi
