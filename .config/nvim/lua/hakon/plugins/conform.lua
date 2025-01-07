@@ -9,6 +9,16 @@ return {
         typescript = { 'prettierd' },
         typescriptreact = { 'prettierd' },
         rust = { 'rustfmt' },
+        sql = { 'sql-formatter' },
+      },
+      formatters = {
+        ["sql-formatter"] = {
+          command = vim.fn.stdpath("data") .. "/mason/bin/sql-formatter",
+          args = {
+            "--language", "postgresql",
+          },
+          stdin = true,
+        },
       },
       format_on_save = {
         timeout_ms = 500,
