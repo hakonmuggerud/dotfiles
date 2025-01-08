@@ -1,7 +1,7 @@
 # =============================
 # prompt
 # =============================
-THEME=$"gruvbox-dark"
+THEME=catppuccin-mocha
 
 setopt PROMPT_SUBST
 NEWLINE=$'\n'
@@ -16,7 +16,7 @@ fi
 # env variables and options
 # =============================
 
-if [[ -d $HOME/.env ]]; then
+if [[ -f "$HOME/.env" ]]; then
   source $HOME/.env
 fi
 
@@ -25,9 +25,10 @@ if [ -d "$HOME/bin" ] ; then
     export PATH="$HOME/bin:$PATH"
 fi
 
-export AWS_PROFILE=videocation-main
+export AWS_PROFILE=non-prod
+export AWS_DEFAULT_PROFILE=non-prod
 export EDITOR=nvim
-export BAT_THEME=gruvbox-dark
+export BAT_THEME="$THEME"
 
 export HISTFILE=~/.zsh_history
 export HISTSIZE=10000
@@ -70,7 +71,7 @@ alias gq="git checkout qa-test"
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-alias bat="batcat"
+#alias bat="batcat"
 alias cat="bat"
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --group-directories-first"
 

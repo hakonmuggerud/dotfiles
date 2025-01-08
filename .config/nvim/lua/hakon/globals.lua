@@ -1,1 +1,1 @@
-COLORSCHEME = 'gruvbox'
+COLORSCHEME = 'catppuccin'

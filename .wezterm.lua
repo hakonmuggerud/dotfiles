@@ -54,7 +54,7 @@ local themes = {
     }
 }
 
-local theme = themes[2]
+local theme = themes[1]
 
 config.color_scheme = theme.color_scheme
 config.window_background_opacity = 0.96
