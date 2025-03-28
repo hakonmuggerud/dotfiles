@@ -3,8 +3,8 @@ return {
   config = function()
     require('transparent').setup({
       extra_groups = {
-        'NormalFloat'
-      }
+        'NormalFloat',
+      },
     })
-  end
+  end,
 }

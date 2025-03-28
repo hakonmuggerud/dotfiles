@@ -11,5 +11,5 @@ return {
     vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
     vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
     require('smart-splits').setup()
-  end
+  end,
 }

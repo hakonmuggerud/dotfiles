@@ -7,10 +7,10 @@ return {
   config = function()
     vim.defer_fn(function()
       vim.filetype.add({
-        pattern = { [".env.*"] = "sh" }
+        pattern = { ['.env.*'] = 'sh' },
       })
 
-      require('nvim-treesitter.configs').setup {
+      require('nvim-treesitter.configs').setup({
         -- Add languages to be installed here that you want installed for treesitter
         ensure_installed = {
           'bash',
@@ -90,7 +90,7 @@ return {
             },
           },
         },
-      }
+      })
     end, 0)
-  end
+  end,
 }

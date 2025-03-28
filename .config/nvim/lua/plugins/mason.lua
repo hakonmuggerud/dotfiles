@@ -12,11 +12,11 @@ return {
     mason.setup({
       ui = {
         icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗",
+          package_installed = '✓',
+          package_pending = '➜',
+          package_uninstalled = '✗',
         },
-        border = 'rounded'
+        border = 'rounded',
       },
     })
 
@@ -28,13 +28,13 @@ return {
         'rust_analyzer',
         'svelte',
         'ts_ls',
-      }
+      },
     })
 
     mason_tool_installer.setup({
       ensure_installed = {
-        'prettierd'
-      }
+        'prettierd',
+      },
     })
-  end
+  end,
 }

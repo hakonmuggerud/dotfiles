@@ -12,10 +12,11 @@ return {
         sql = { 'sql-formatter' },
       },
       formatters = {
-        ["sql-formatter"] = {
-          command = vim.fn.stdpath("data") .. "/mason/bin/sql-formatter",
+        ['sql-formatter'] = {
+          command = vim.fn.stdpath('data') .. '/mason/bin/sql-formatter',
           args = {
-            "--language", "postgresql",
+            '--language',
+            'postgresql',
           },
           stdin = true,
         },
