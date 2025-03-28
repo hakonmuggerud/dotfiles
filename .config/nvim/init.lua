@@ -1,30 +1,36 @@
-require('hakon.options')
-require('hakon.keymaps')
+require('keymaps')
+require('lsp')
+require('options')
 
--- Install `lazy.nvim` plugin manager
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
+  vim.fn.system({
     'git',
     'clone',
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
+    '--branch=stable',
     lazypath,
-  }
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-    {
-      import = 'hakon.plugins'
-    },
-    {
-      import = 'hakon.plugins.lsp'
-    }
-  },
   {
-    ui = {
-      border = 'rounded'
-    }
-  })
+    import = 'plugins',
+  },
+}, {
+  ui = {
+    border = 'rounded',
+  },
+})
+
+vim.lsp.enable({
+  'eslint',
+  'html',
+  'lua_ls',
+  'rust_analyzer',
+  'svelte',
+  'terraformls',
+  'ts_ls',
+})

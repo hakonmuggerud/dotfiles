@@ -1,4 +1,4 @@
-require('hakon.globals')
+require('globals')
 
 return {
   -- Set lualine as statusline

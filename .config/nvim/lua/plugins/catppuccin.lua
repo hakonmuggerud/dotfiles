@@ -1,9 +1,9 @@
-require('hakon.globals')
+require('globals')
 
-local theme_name = 'gruvbox'
+local theme_name = 'catppuccin'
 
 return {
-  'ellisonleao/gruvbox.nvim',
+  'catppuccin/nvim',
   name = theme_name,
   lazy = COLORSCHEME ~= theme_name,
   priority = COLORSCHEME == theme_name and 1000 or 100,
