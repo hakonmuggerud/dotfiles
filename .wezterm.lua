@@ -51,7 +51,16 @@ local themes = {
             bg = '#b8bb26',
             fg = '#111111',
         },
-    }
+    },
+    {
+        color_scheme = 'rose-pine-moon',
+        font_size = 16,
+        background = '#191724',
+        active_tab = {
+            bg = '#26233a',
+            fg = '#e0def4'
+        }
+    },
 }
 
 local theme = themes[1]
@@ -95,9 +104,29 @@ config.font_rules = {
 config.leader = { key = 'e', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
     {
+        key = 'r',
+        mods = 'LEADER',
+        action = wezterm.action.ReloadConfiguration,
+    },
+    {
         key = 's',
         mods = 'LEADER',
         action = wezterm.action.ShowLauncherArgs { flags = 'WORKSPACES' },
+    },
+    {
+        key = '1',
+        mods = 'LEADER',
+        action = wezterm.action.SwitchToWorkspace { name = 'default' },
+    },
+    {
+        key = '2',
+        mods = 'LEADER',
+        action = wezterm.action.SwitchToWorkspace { name = 'main' },
+    },
+    {
+        key = '3',
+        mods = 'LEADER',
+        action = wezterm.action.SwitchToWorkspace { name = 'notes' },
     },
     {
         key = 'n',

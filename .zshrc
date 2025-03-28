@@ -10,6 +10,9 @@ PS1="${NEWLINE}${NEWLINE} %B%K{green}%F{black} %~ %f%k %F{green}>%f%b "
 if [[ "$THEME" = "catppuccin-mocha" ]]; then
   PS1="${NEWLINE}${NEWLINE} %B%K{magenta}%F{black} %~ %f%k %F{magenta}>%f%b "
 fi
+if [[ "$THEME" = "rose-pine" ]]; then
+  PS1="${NEWLINE}${NEWLINE} %B%K{white}%F{black} %~ %f%k %F{white}>%f%b "
+fi
 
 
 # =============================
@@ -31,14 +34,17 @@ export EDITOR=nvim
 export BAT_THEME="$THEME"
 
 export HISTFILE=~/.zsh_history
-export HISTSIZE=10000
-export SAVEHIST=10000
+export HISTSIZE=500000
+export SAVEHIST=500000
 setopt INC_APPEND_HISTORY_TIME
 
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
 
 bindkey -e
+
+# disable xon/xoff flow control to allow more keybinds
+stty -ixon
 
 
 # =============================
@@ -68,6 +74,8 @@ alias pushu="git push -u origin HEAD"
 alias glog="git log --oneline "
 alias gs="git status -sb"
 alias gq="git checkout qa-test"
+alias kb="kubectl"
+alias kx="kubectx"
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
@@ -145,6 +153,7 @@ function fzf_search_git_branches {
 
 bindkey -s ^f "fzf_search_specific_dirs\n"
 bindkey -s ^b "fzf_search_git_branches\n"
+bindkey "^q" end-of-line
 
 if [[ "$(tty)" = "/dev/tty1" ]]; then
   exec startx
