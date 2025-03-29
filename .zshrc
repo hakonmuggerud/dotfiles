@@ -78,6 +78,7 @@ alias kb="kubectl"
 alias kx="kubectx"
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dot=dotfiles
 
 #alias bat="batcat"
 alias cat="bat"
