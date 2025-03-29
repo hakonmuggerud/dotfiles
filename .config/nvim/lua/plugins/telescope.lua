@@ -58,44 +58,36 @@ end
 
 -- Setup function
 function M.setup()
+  local builtin = require('telescope.builtin')
   -- File and buffer operations
-  map('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-  map('n', '<leader><space>', create_modified_buffers_picker(), { desc = '[ ] Find existing buffers' })
-  map('n', '<leader>/', function()
-    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
-      winblend = 10,
-      previewer = false,
-    }))
-  end, { desc = '[/] Fuzzily search in current buffer' })
-
-  -- Git operations
-  map('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-  map('n', '<leader>gs', require('telescope.builtin').git_status, { desc = '[G]it [S]tatus' })
-
-  -- Search operations
-  map('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-  map('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-  map('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-  map('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+  map('n', '<leader><space>', builtin.oldfiles, { desc = '[?] Find recently opened files' })
+  map('n', '<leader>?', create_modified_buffers_picker(), { desc = '[ ] Find existing buffers' })
+  map('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
+  map('n', '<leader>gf', builtin.git_files, { desc = 'Search [G]it [F]iles' })
+  map('n', '<leader>gs', builtin.git_status, { desc = '[G]it [S]tatus' })
+  map('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+  map('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+  map('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+  map('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+  map('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+  map('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+  map('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+  map('n', '<leader>st', builtin.treesitter, { desc = '[S]earch [T]reesitter' })
+  map('n', '<leader>ss', builtin.commands, { desc = '[S]earch [C]ommands' })
   map('n', '<leader>sa', function()
-    require('telescope.builtin').live_grep({
+    builtin.live_grep({
       additional_args = function()
         return { '--hidden' }
       end,
     })
   end, { desc = '[S]earch [A]ll by grep' })
-  map('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-  map('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-  map('n', '<leader>st', require('telescope.builtin').treesitter, { desc = '[S]earch [T]reesitter' })
-  map('n', '<leader>sp', require('telescope.builtin').planets, { desc = '[S]earch [P]lanets' })
-  map('n', '<leader>ss', require('telescope.builtin').commands, { desc = '[S]earch [C]ommands' })
 
-  -- Enable telescope fzf native, if installed
   pcall(require('telescope').load_extension, 'fzf')
 end
 
 return {
   'nvim-telescope/telescope.nvim',
+  event = 'VimEnter',
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
