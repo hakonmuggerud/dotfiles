@@ -32,6 +32,7 @@ export AWS_PROFILE=non-prod
 export AWS_DEFAULT_PROFILE=non-prod
 export EDITOR=nvim
 export BAT_THEME="$THEME"
+export ZK_NOTEBOOK_DIR="$HOME/notes"
 
 export HISTFILE=~/.zsh_history
 export HISTSIZE=500000
