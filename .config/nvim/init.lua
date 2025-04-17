@@ -27,6 +27,9 @@ require('lazy').setup({
   rocks = {
     enabled = false,
   },
+  ui = {
+    border = 'rounded',
+  },
 })
 
 vim.lsp.enable({
@@ -38,3 +41,5 @@ vim.lsp.enable({
   'terraformls',
   'ts_ls',
 })
+
+require('ui')

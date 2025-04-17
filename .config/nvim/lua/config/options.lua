@@ -1,5 +1,5 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 vim.opt.breakindent = true
 vim.opt.completeopt = 'menuone,noselect'
@@ -30,4 +30,3 @@ vim.schedule(function()
 end)
 
 vim.diagnostic.config({ virtual_text = true })
-
