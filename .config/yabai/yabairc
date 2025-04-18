@@ -38,10 +38,10 @@ yabai -m rule --add app="^Karabiner-Elements$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="DBeaver" title="Connect*" manage=off
 
-borders active_color=0xffb4befe 	\
-	inactive_color=0xff6c7086 	\
-	width=8.0 			\
-	style=square 			\
-	order=above 			&
-	# blacklist="firefox" 		\
+# borders active_color=0xffb4befe 	\
+# 	inactive_color=0xff6c7086 	\
+# 	width=8.0 			\
+# 	style=square 			\
+# 	order=above 			&
+# 	# blacklist="firefox" 		\
 
