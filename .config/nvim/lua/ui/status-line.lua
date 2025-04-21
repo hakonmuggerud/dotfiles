@@ -1,17 +1,15 @@
 vim.cmd([[
   hi StatusLine guifg=#efefef guibg=#303030 gui=NONE
   hi StatusLineGitBlame guifg=#aaaaaa guibg=#303030 gui=NONE
-  hi StatusLineLSP guifg=#7CCCB8 guibg=#303030 gui=bold
+  hi StatusLineLSP guifg=#cdd6f4 guibg=#313244 gui=bold
 ]])
 
--- Function to get file icon using nvim-web-devicons
 local function get_file_icon()
   local filename = vim.fn.expand('%:t')
   local extension = vim.fn.expand('%:e')
   local icon = ''
   local icon_color = ''
 
-  -- Check if nvim-web-devicons is available
   if package.loaded['nvim-web-devicons'] then
     local devicons = require('nvim-web-devicons')
     icon, icon_color = devicons.get_icon_color(filename, extension, { default = true })
@@ -25,20 +23,16 @@ local function get_file_icon()
   return icon
 end
 
--- Function to get formatted path with filename and icon
 local function get_formatted_path()
   local filepath = vim.fn.expand('%:.:h') -- Path relative to current directory without filename
   local filename = vim.fn.expand('%:t') -- Just the filename
 
-  -- Handle empty filename
   if filename == '' then
     return '[No Name]'
   end
 
-  -- Get the icon for the file
   local icon = get_file_icon()
 
-  -- Format the path
   if filepath == '.' then
     -- We're in the root directory
     return icon .. ' ' .. filename
@@ -48,7 +42,6 @@ local function get_formatted_path()
   end
 end
 
--- Function to get LSP client info
 local function get_lsp_info()
   local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
 
@@ -56,13 +49,13 @@ local function get_lsp_info()
     return ''
   end
 
-  -- Get first client for simplicity
-  local client = buf_clients[1]
-  local client_name = client.name
+  local client_names = {}
+  for _, client in ipairs(buf_clients) do
+    table.insert(client_names, client.name)
+  end
+  local clients_str = table.concat(client_names, ', ')
 
-  local icon = '' -- Default icon for LSP
-
-  return '  -  ' .. '%#StatusLineLSP#' .. icon .. '  ' .. client_name .. '%#StatusLine#'
+  return '  |  ' .. '%#StatusLineLSP#  LSP ~ ' .. clients_str .. '%#StatusLine#'
 end
 
 function _G.custom_statusline()
@@ -71,7 +64,6 @@ function _G.custom_statusline()
   -- Left section
   statusline = statusline .. get_formatted_path() .. '%#StatusLine#'
 
-  -- LSP information in the middle
   local lsp_info = get_lsp_info()
   if lsp_info ~= '' then
     statusline = statusline .. lsp_info
@@ -80,12 +72,11 @@ function _G.custom_statusline()
   -- Middle spacer
   statusline = statusline .. '%='
 
-  -- Right section - Git blame (will be updated after cursor move)
+  -- Right section
   if _G.current_git_blame and _G.current_git_blame ~= '' then
     statusline = statusline .. _G.current_git_blame .. ' %#StatusLine#        '
   end
 
-  -- Position information (line and character)
   statusline = statusline .. '%l:%c %#StatusLine#'
 
   return statusline
