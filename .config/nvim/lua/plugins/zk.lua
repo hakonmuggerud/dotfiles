@@ -39,6 +39,7 @@ end
 
 return {
   'zk-org/zk-nvim',
+  ft = 'markdown',
   config = function()
     require('zk').setup({
       picker = 'fzf_lua',

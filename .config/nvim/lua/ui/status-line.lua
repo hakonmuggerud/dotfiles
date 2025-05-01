@@ -1,7 +1,7 @@
 vim.cmd([[
   hi StatusLine guifg=#efefef guibg=#303030 gui=NONE
-  hi StatusLineGitBlame guifg=#aaaaaa guibg=#303030 gui=NONE
-  hi StatusLineLSP guifg=#cdd6f4 guibg=#313244 gui=bold
+  hi StatusLineGitBlame guifg=#a6adc8 guibg=NONE gui=NONE
+  hi StatusLineLSP guifg=#cdd6f4 guibg=NONE gui=bold
 ]])
 
 local function get_file_icon()
@@ -55,19 +55,14 @@ local function get_lsp_info()
   end
   local clients_str = table.concat(client_names, ', ')
 
-  return '  |  ' .. '%#StatusLineLSP#  LSP ~ ' .. clients_str .. '%#StatusLine#'
+  return '  ' .. '%#StatusLineLSP#  LSP ~ ' .. clients_str .. '%#StatusLine#'
 end
 
 function _G.custom_statusline()
-  local statusline = '   '
+  local statusline = ' '
 
   -- Left section
   statusline = statusline .. get_formatted_path() .. '%#StatusLine#'
-
-  local lsp_info = get_lsp_info()
-  if lsp_info ~= '' then
-    statusline = statusline .. lsp_info
-  end
 
   -- Middle spacer
   statusline = statusline .. '%='
@@ -78,6 +73,11 @@ function _G.custom_statusline()
   end
 
   statusline = statusline .. '%l:%c %#StatusLine#'
+
+  local lsp_info = get_lsp_info()
+  if lsp_info ~= '' then
+    statusline = statusline .. lsp_info
+  end
 
   return statusline
 end
@@ -90,7 +90,7 @@ local function update_git_blame()
   if package.loaded['gitblame'] then
     local gitblame = require('gitblame')
     if gitblame.is_blame_text_available() then
-      _G.current_git_blame = gitblame.get_current_blame_text()
+      _G.current_git_blame = '%#StatusLineGitBlame#' .. gitblame.get_current_blame_text()
     else
       _G.current_git_blame = ''
     end

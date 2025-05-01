@@ -1,4 +1,4 @@
 return {
-  'jiangmiao/auto-pairs',
+  -- 'jiangmiao/auto-pairs',
   'tpope/vim-sleuth',
 }

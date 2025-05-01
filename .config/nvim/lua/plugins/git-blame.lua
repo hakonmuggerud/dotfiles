@@ -6,5 +6,5 @@ vim.keymap.set('n', '<leader>co', '<cmd>GitBlameOpenCommitURL<cr>', { desc = 'Op
 
 return {
   'f-person/git-blame.nvim',
-  event = 'VeryLazy',
+  event = 'BufEnter',
 }
