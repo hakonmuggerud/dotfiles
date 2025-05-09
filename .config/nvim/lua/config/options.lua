@@ -21,10 +21,13 @@ vim.opt.termguicolors = true
 vim.opt.timeoutlen = 300
 vim.opt.undofile = true
 vim.opt.updatetime = 250
+vim.opt.winborder = 'rounded'
 vim.opt.wrap = false
 
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
-vim.diagnostic.config({ virtual_text = true })
+vim.diagnostic.config({
+  virtual_text = true,
+})
