@@ -11,6 +11,8 @@ return {
         typescriptreact = { 'prettierd' },
         rust = { 'rustfmt' },
         sql = { 'sql-formatter' },
+        json = { 'jq' },
+        jsonc = { 'deno' },
       },
       formatters = {
         ['sql-formatter'] = {

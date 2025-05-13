@@ -1,5 +1,5 @@
 vim.cmd([[
-  hi StatusLine guifg=#efefef guibg=#303030 gui=NONE
+  hi StatusLine guifg=#efefef guibg=#000000 gui=NONE
   hi StatusLineGitBlame guifg=#a6adc8 guibg=NONE gui=NONE
   hi StatusLineLSP guifg=#cdd6f4 guibg=NONE gui=bold
 ]])
@@ -25,7 +25,7 @@ end
 
 local function get_formatted_path()
   local filepath = vim.fn.expand('%:.:h') -- Path relative to current directory without filename
-  local filename = vim.fn.expand('%:t') -- Just the filename
+  local filename = vim.fn.expand('%:t')   -- Just the filename
 
   if filename == '' then
     return '[No Name]'

@@ -44,26 +44,13 @@ local themes = {
     },
   },
   {
-    color_scheme = 'Gruvbox dark, medium (base16)',
-    font_size = 13,
-    background = '#282828',
-    active_tab = {
-      bg = '#b8bb26',
-      fg = '#111111',
-    },
-  },
-  {
-    color_scheme = 'rose-pine-moon',
+    color_scheme = 'Black Metal (Gorgoroth) (base16)',
     font_size = 16,
-    background = '#191724',
-    active_tab = {
-      bg = '#26233a',
-      fg = '#e0def4',
-    },
-  },
+    background = '#000000',
+  }
 }
 
-local theme = themes[1]
+local theme = themes[2]
 
 config.color_scheme = theme.color_scheme
 config.window_background_opacity = 0.96
@@ -73,15 +60,11 @@ config.use_fancy_tab_bar = false
 config.colors = {
   tab_bar = {
     background = theme.background,
-    active_tab = {
-      bg_color = theme.active_tab.bg,
-      fg_color = theme.active_tab.fg,
-    },
   },
 }
 
 config.font_size = theme.font_size
-config.font = wezterm.font({ family = 'FiraMono Nerd Font' })
+config.font = wezterm.font({ family = 'FiraCode Nerd Font' })
 config.bold_brightens_ansi_colors = true
 config.font_rules = {
   {
@@ -213,5 +196,7 @@ config.keys = {
   split_nav('resize', 'k'),
   split_nav('resize', 'l'),
 }
+
+config.enable_wayland = false
 
 return config
