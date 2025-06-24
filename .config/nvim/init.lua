@@ -39,6 +39,7 @@ vim.lsp.enable({
   'svelte',
   'terraformls',
   'ts_ls',
+  'zls',
 })
 
 require('ui')

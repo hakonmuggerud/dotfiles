@@ -13,6 +13,7 @@ return {
         sql = { 'sql-formatter' },
         json = { 'jq' },
         jsonc = { 'deno' },
+        zig = { 'zls' }
       },
       formatters = {
         ['sql-formatter'] = {

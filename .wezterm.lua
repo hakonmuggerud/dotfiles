@@ -33,6 +33,13 @@ local function split_nav(resize_or_move, key)
   }
 end
 
+local sessionizer = wezterm.plugin.require "https://github.com/mikkasendke/sessionizer.wezterm"
+local my_schema = {
+  sessionizer.DefaultWorkspace {},
+  sessionizer.AllActiveWorkspaces {},
+  sessionizer.FdSearch(wezterm.home_dir .. "/repos"),
+}
+
 local themes = {
   {
     color_scheme = 'Catppuccin Mocha',
@@ -63,6 +70,7 @@ config.colors = {
   },
 }
 
+config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 config.font_size = theme.font_size
 config.font = wezterm.font({ family = 'FiraCode Nerd Font' })
 config.bold_brightens_ansi_colors = true
@@ -86,6 +94,11 @@ config.font_rules = {
 
 config.leader = { key = 'e', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
+  {
+    key = "f",
+    mods = "LEADER",
+    action = sessionizer.show(my_schema),
+  },
   {
     key = 'r',
     mods = 'LEADER',
