@@ -74,7 +74,7 @@ function newb {
 alias pushu="git push -u origin HEAD" 
 alias glog="git log --oneline "
 alias gs="git status -sb"
-alias gq="git checkout qa-test"
+alias gq="git checkout staging"
 alias kb="kubectl"
 alias kx="kubectx"
 
