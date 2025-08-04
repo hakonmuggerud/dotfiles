@@ -33,6 +33,7 @@ require('lazy').setup({
 
 vim.lsp.enable({
   'eslint',
+  'gopls',
   'html',
   'lua_ls',
   'rust_analyzer',
