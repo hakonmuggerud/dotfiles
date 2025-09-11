@@ -8,5 +8,5 @@ return {
     'typescriptreact',
     'typescript.tsx',
   },
-  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+  root_markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock', 'deno.lock' },
 }

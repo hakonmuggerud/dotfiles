@@ -1,5 +1,5 @@
 vim.cmd([[
-  hi StatusLine guifg=#efefef guibg=#303030 gui=NONE
+  hi StatusLine guifg=#efefef guibg=NONE gui=NONE
   hi StatusLineGitBlame guifg=#a6adc8 guibg=NONE gui=NONE
   hi StatusLineLSP guifg=#cdd6f4 guibg=NONE gui=bold
 ]])

@@ -10,49 +10,48 @@ return {
     'vue',
     'svelte',
     'astro',
+    'htmlangular',
   },
   root_markers = {
-    '.eslintrc',
-    '.eslintrc.js',
-    '.eslintrc.cjs',
-    '.eslintrc.yaml',
-    '.eslintrc.yml',
-    '.eslintrc.json',
-    'eslint.config.js',
-    'eslint.config.mjs',
-    'eslint.config.cjs',
-    'eslint.config.ts',
-    'eslint.config.mts',
-    'eslint.config.cts',
+    'package-lock.json',
+    'yarn.lock',
+    'pnpm-lock.yaml',
+    'bun.lockb',
+    'bun.lock',
+    'deno.lock',
   },
   settings = {
-    codeAction = {
-      disableRuleComment = {
-        enable = true,
-        location = 'separateLine',
-      },
+    validate = 'on',
+    packageManager = nil,
+    useESLintClass = false,
+    experimental = {
+      useFlatConfig = false,
     },
     codeActionOnSave = {
       enable = false,
       mode = 'all',
     },
-    experimental = {
-      useFlatConfig = false,
-    },
     format = true,
-    nodePath = '',
+    quiet = false,
     onIgnoredFiles = 'off',
-    packageManager = nil,
+    rulesCustomizations = {},
+    run = 'onType',
     problems = {
       shortenToSingleLine = false,
     },
-    quiet = false,
-    rulesCustomizations = {},
-    run = 'onType',
-    useESLintClass = false,
-    validate = 'on',
-    workingDirectory = {
-      mode = 'location',
+    -- nodePath configures the directory in which the eslint server should start its node_modules resolution.
+    -- This path is relative to the workspace folder (root dir) of the server instance.
+    nodePath = '',
+    -- use the workspace folder location or the file location (if no workspace folder is open) as the working directory
+    workingDirectory = { mode = 'auto' },
+    codeAction = {
+      disableRuleComment = {
+        enable = true,
+        location = 'separateLine',
+      },
+      showDocumentation = {
+        enable = true,
+      },
     },
   },
 }
