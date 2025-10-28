@@ -52,10 +52,12 @@ vim.pack.add({
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
   { src = 'https://github.com/mason-org/mason.nvim' },
   { src = 'https://github.com/mrjones2014/smart-splits.nvim' },
+  { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/stevearc/conform.nvim' },
   { src = 'https://github.com/stevearc/oil.nvim' },
+  { src = 'https://github.com/supermaven-inc/supermaven-nvim' },
   { src = 'https://github.com/tpope/vim-sleuth' },
   { src = 'https://github.com/zk-org/zk-nvim' },
 })
@@ -215,6 +217,8 @@ oil.setup({
 })
 vim.keymap.set('n', '<leader>-', '<CMD>Oil<CR>')
 vim.keymap.set('n', '-', oil.toggle_float)
+
+require('supermaven-nvim').setup({})
 
 require('mason').setup()
 
