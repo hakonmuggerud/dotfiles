@@ -66,7 +66,7 @@ local themes = {
 local theme = themes[1]
 
 config.color_scheme = theme.color_scheme
-config.window_background_opacity = 0.96
+-- config.window_background_opacity = 0.96
 config.window_decorations = 'RESIZE'
 
 config.use_fancy_tab_bar = false
@@ -107,6 +107,11 @@ config.keys = {
     key = 'r',
     mods = 'LEADER',
     action = wezterm.action.ReloadConfiguration,
+  },
+  {
+    key = 'Enter',
+    mods = 'SHIFT',
+    action = wezterm.action({ SendString = '\x1b\r' }),
   },
   {
     key = 's',
