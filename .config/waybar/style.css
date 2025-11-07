@@ -1,0 +1,177 @@
+/* Background colors */
+@define-color bg0_hard #1d2021;
+@define-color bg0 #282828;
+@define-color bg0_soft #32302f;
+@define-color bg1 #3c3836;
+@define-color bg2 #504945;
+@define-color bg3 #665c54;
+@define-color bg4 #7c6f64;
+
+/* Foreground colors */
+@define-color fg0 #fbf1c7;
+@define-color fg1 #ebdbb2;
+@define-color fg2 #d5c4a1;
+@define-color fg3 #bdae93;
+@define-color fg4 #a89984;
+
+/* Gray */
+@define-color gray #928374;
+
+/* Bright colors */
+@define-color red #fb4934;
+@define-color green #b8bb26;
+@define-color yellow #fabd2f;
+@define-color blue #83a598;
+@define-color purple #d3869b;
+@define-color aqua #8ec07c;
+@define-color orange #fe8019;
+
+/* Neutral/muted colors */
+@define-color red_dim #cc2412;
+@define-color green_dim #98971a;
+@define-color yellow_dim #d79921;
+@define-color blue_dim #458588;
+@define-color purple_dim #b16286;
+@define-color aqua_dim #689d6a;
+@define-color orange_dim #d65d0e;
+
+/* Dark colors */
+@define-color red_dark #9d0006;
+@define-color green_dark #79740e;
+@define-color yellow_dark #b57614;
+@define-color blue_dark #076678;
+@define-color purple_dark #8f3f71;
+@define-color aqua_dark #427b58;
+@define-color orange_dark #af3a03;
+
+* {
+  font-family: FiraCode Nerd Font;
+  font-size: 16px;
+}
+
+window#waybar {
+  background-color: @bg0;
+  color: @fg2;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  border-radius: 8px;
+  border: 3px solid @bg0_hard;
+}
+
+button {
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 -3px transparent;
+  /* Avoid rounded borders under each button name */
+  border: none;
+  border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+  background: inherit;
+  box-shadow: inset 0 -3px @fg1;
+}
+
+#workspaces button {
+  padding: 0 4px;
+  margin: 2px 0;
+  background-color: transparent;
+  color: @fg1;
+}
+
+#workspaces button.active {
+  background-color: @bg2;
+}
+
+#workspaces button:hover {
+  background: @bg1;
+}
+
+#workspaces button.focused {
+  background-color: @blue_dim;
+  box-shadow: inset 0 -3px @fg1;
+}
+
+#workspaces button.urgent {
+  background-color: @red;
+}
+
+#mode {
+  background-color: @blue_dim;
+  box-shadow: inset 0 -3px @fg1;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#mpd {
+  padding: 0 10px;
+  color: @fg1;
+}
+
+#window,
+#workspaces {
+  margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+  margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+  margin-right: 0;
+}
+
+@keyframes blink {
+  to {
+    background-color: @fg0;
+    color: @bg0;
+  }
+}
+
+label:focus {
+  background-color: @bg1;
+}
+
+#cpu {
+}
+
+#memory {
+}
+
+#wireplumber {
+}
+
+#wireplumber.muted {
+}
+
+#temperature {
+}
+
+#temperature.critical {
+  background-color: @red;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @red;
+}
