@@ -37,51 +37,44 @@ local themes = {
   {
     color_scheme = 'Catppuccin Mocha',
     font_size = 16,
-    background = '#1e1e2e',
-    active_tab = {
-      bg = '#f5c2e7',
-      fg = '#111111',
+    font_family = 'FiraMono Nerd Font',
+    colors = {
+      tab_bar = {
+        background = '#1e1e2e',
+        active_tab = {
+          bg = '#f5c2e7',
+          fg = '#111111',
+        },
+      },
     },
   },
   {
     color_scheme = 'Gruvbox dark, medium (base16)',
-    font_size = 13,
-    background = '#282828',
-    active_tab = {
-      bg = '#b8bb26',
-      fg = '#111111',
-    },
-  },
-  {
-    color_scheme = 'rose-pine-moon',
     font_size = 16,
-    background = '#191724',
-    active_tab = {
-      bg = '#26233a',
-      fg = '#e0def4',
-    },
+    font_family = 'FiraCode Nerd Font',
+    colors = {
+      tab_bar = {
+        active_tab = {
+          bg_color = '#98971a',
+          fg_color = '#111111',
+        },
+      },
+    }
   },
 }
 
-local theme = themes[1]
+local theme = themes[2]
 
 config.color_scheme = theme.color_scheme
--- config.window_background_opacity = 0.96
+config.window_background_opacity = 0.96
 config.window_decorations = 'RESIZE'
 
 config.use_fancy_tab_bar = false
-config.colors = {
-  tab_bar = {
-    background = theme.background,
-    active_tab = {
-      bg_color = theme.active_tab.bg,
-      fg_color = theme.active_tab.fg,
-    },
-  },
-}
+config.colors = theme.colors
 
+config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 config.font_size = theme.font_size
-config.font = wezterm.font({ family = 'FiraMono Nerd Font' })
+config.font = wezterm.font({ family = theme.font_family });
 config.bold_brightens_ansi_colors = true
 config.font_rules = {
   {
@@ -218,5 +211,7 @@ config.keys = {
   split_nav('resize', 'k'),
   split_nav('resize', 'l'),
 }
+
+config.enable_wayland = false
 
 return config
