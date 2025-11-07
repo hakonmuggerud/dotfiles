@@ -108,6 +108,8 @@ require('conform').setup({
     rust = { 'rustfmt' },
     sql = { 'sql-formatter' },
     css = { 'prettierd' },
+    json = { 'prettierd' },
+    jsonc = { 'prettierd' },
   },
   formatters = {
     ['sql-formatter'] = {
