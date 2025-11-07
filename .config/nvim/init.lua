@@ -47,6 +47,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.pack.add({
   { src = 'https://github.com/Saghen/blink.cmp' },
   { src = 'https://github.com/catppuccin/nvim' },
+  { src = 'https://github.com/ellisonleao/gruvbox.nvim' },
   { src = 'https://github.com/f-person/git-blame.nvim' },
   { src = 'https://github.com/ibhagwan/fzf-lua' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
@@ -82,12 +83,20 @@ require('blink.cmp').setup({
   signature = { enabled = true },
 })
 
+require('gruvbox').setup({
+  transparent_mode = true,
+})
 require('catppuccin').setup({
   flavor = 'mocha',
   integrations = {
     mason = false,
   },
 })
+
+local color_scheme_env = os.getenv('COLOR_SCHEME')
+print(color_scheme_env)
+
+vim.cmd('colorscheme ' .. (color_scheme_env or 'catppuccin-mocha'))
 
 require('conform').setup({
   formatters_by_ft = {
@@ -98,6 +107,7 @@ require('conform').setup({
     typescriptreact = { 'prettierd' },
     rust = { 'rustfmt' },
     sql = { 'sql-formatter' },
+    css = { 'prettierd' },
   },
   formatters = {
     ['sql-formatter'] = {
@@ -246,6 +256,16 @@ vim.keymap.set('n', '<leader>zc', zk_utils.toggle_checkbox)
 
 vim.keymap.set('n', '<leader>co', '<cmd>GitBlameOpenCommitURL<cr>', { desc = 'Open commit url' })
 
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' },
+      },
+    },
+  },
+})
+
 vim.lsp.enable({
   'eslint',
   'gopls',
@@ -255,8 +275,7 @@ vim.lsp.enable({
   'svelte',
   'terraformls',
   'ts_ls',
+  'hyprls',
 })
-
-vim.cmd.colorscheme('catppuccin')
 
 require('status-line')
