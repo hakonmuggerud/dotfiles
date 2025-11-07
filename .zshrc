@@ -1,16 +1,15 @@
 # =============================
 # prompt
 # =============================
-THEME=catppuccin-mocha
 
 setopt PROMPT_SUBST
 NEWLINE=$'\n'
 PS1="${NEWLINE}${NEWLINE} %B%K{green}%F{black} %~ %f%k %F{green}>%f%b "
 
-if [[ "$THEME" = "catppuccin-mocha" ]]; then
+if [[ "$COLOR_SCHEME" = "catppuccin-mocha" ]]; then
   PS1="${NEWLINE}${NEWLINE} %B%K{magenta}%F{black} %~ %f%k %F{magenta}>%f%b "
 fi
-if [[ "$THEME" = "rose-pine" ]]; then
+if [[ "$COLOR_SCHEME" = "gruvbox" ]]; then
   PS1="${NEWLINE}${NEWLINE} %B%K{white}%F{black} %~ %f%k %F{white}>%f%b "
 fi
 
@@ -24,9 +23,8 @@ if [[ -f "$HOME/.env" ]]; then
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    export PATH="$HOME/bin:$PATH"
-fi
+[ -d "$HOME/bin" ] && export PATH="$HOME/bin:$PATH"
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 
 export AWS_PROFILE=non-prod
 export AWS_DEFAULT_PROFILE=non-prod
@@ -118,12 +116,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-source <(kubectl completion zsh)
+if command -v kubectl &> /dev/null; then
+  source <(kubectl completion zsh)
+fi
 
-neofetch
-
-
-# =============================
+  # =============================
 # fzf configuration
 # =============================
 if [[ -d "$HOME/.fzf/bin" ]]; then
