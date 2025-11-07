@@ -1,53 +1,115 @@
 // -*- mode: jsonc -*-
 {
-    "height": 32,
-    "margin": 8,
-    "spacing": 4,
-    "modules-left": [
-        "custom/mytext",
-        "hyprland/workspaces",
+  "height": 32,
+  "margin": 8,
+  "spacing": 4,
+  "modules-left": ["custom/arch-logo", "hyprland/workspaces"],
+  "modules-center": ["hyprland/window", "hyprland/windowcount"],
+  "modules-right": [
+    "cpu",
+    "custom/separator",
+    "memory",
+    "custom/separator",
+    "wireplumber",
+    "custom/separator",
+    "wireplumber#microphone",
+    "custom/separator",
+    "clock",
+    "custom/separator",
+    "tray",
+    "group/group-power",
+  ],
+  "custom/arch-logo": {
+    "format": "  ",
+    "tooltip": false,
+  },
+  "hyprland/workspaces": {
+    "persistent-workspaces": {
+      "DP-2": [1, 2, 3, 4, 5, 6, 7, 8],
+      "DP-1": [9],
+    },
+  },
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 60,
+    "separate-outputs": true,
+  },
+  "hyprland/windowcount": {
+    "format": "[1]",
+    "format-empty": " ",
+    "separate-outputs": true,
+  },
+  "cpu": {
+    "format": "{usage}%  ",
+    "tooltip": true,
+  },
+  "memory": {
+    "format": "{}%  ",
+  },
+  "wireplumber": {
+    "format": "{volume} {icon}",
+    "format-muted": " ",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "format-icons": [" ", " ", " "],
+    "tooltip": false,
+  },
+  "wireplumber#microphone": {
+    "node-type": "Audio/Source",
+    "format": " 󰍬 ",
+    "format-muted": " 󰍭 ",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "tooltip": false,
+  },
+  "tray": {
+    "icon-size": 24,
+    "spacing": 10,
+    "show-passive-items": true,
+  },
+  "clock": {
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}",
+    "calendar": {
+      "format": {
+        "today": "<span color='#b8bb26'><b>{}</b></span>",
+      },
+    },
+  },
+  "group/group-power": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "not-power",
+      "transition-left-to-right": false,
+    },
+    "modules": [
+      "custom/power", // First element is the "group leader" and won't ever be hidden
+      "custom/quit",
+      "custom/lock",
+      "custom/reboot",
     ],
-    "modules-right": [
-        "cpu",
-        "memory",
-        "wireplumber",
-        "clock",
-        "tray"
-    ],
-    "custom/mytext": {
-      "format": "  ",
-      "tooltip": false
-    },
-    "hyprland/workspaces": {
-        "persistent-workspaces": {
-            "DP-2": [1, 2, 3, 4, 5, 6, 7, 8],
-            "DP-1": [9]
-        }
-    },
-    "tray": {
-        "spacing": 10,
-    },
-    "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-    "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
-    },
-    "memory": {
-        "format": "{}% "
-    },
-    "custom/power": {
-        "format" : "⏻ ",
-        "tooltip": false,
-        "menu": "on-click",
-        "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-        "menu-actions": {
-            "shutdown": "shutdown",
-            "reboot": "reboot",
-            "suspend": "systemctl suspend",
-            "hibernate": "systemctl hibernate"
-        }
-    }
+  },
+  "custom/quit": {
+    "format": "󰗼 ",
+    "tooltip": false,
+    "on-click": "notify-send 'Quit'",
+  },
+  "custom/lock": {
+    "format": "󰍁 ",
+    "tooltip": false,
+    "on-click": "hyprlock",
+  },
+  "custom/reboot": {
+    "format": "󰜉 ",
+    "tooltip": false,
+    "on-click": "notify-send 'Reboot'",
+  },
+  "custom/power": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "notify-send 'Power'",
+  },
+  "custom/separator": {
+    "format": "|",
+    "tooltip": false,
+  },
 }
