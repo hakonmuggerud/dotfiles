@@ -153,14 +153,44 @@ label:focus {
 
 #cpu {
   color: @blue;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+#cpu:hover {
+  background-color: @bg1;
+  color: @blue;
+  border-radius: 4px;
+  margin: 3px 0;
 }
 
 #memory {
   color: @purple;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+#memory:hover {
+  background-color: @bg1;
+  color: @purple;
+  border-radius: 4px;
+  margin: 3px 0;
 }
 
 #wireplumber {
   color: @green;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+#wireplumber:hover {
+  background-color: @bg1;
+  color: @green;
+  border-radius: 4px;
+  margin: 3px 0;
 }
 
 #wireplumber.muted {
@@ -169,6 +199,16 @@ label:focus {
 
 #wireplumber.microphone {
   color: @aqua;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+#wireplumber.microphone:hover {
+  background-color: @bg1;
+  color: @aqua;
+  border-radius: 4px;
+  margin: 3px 0;
 }
 
 #wireplumber.microphone.muted {
@@ -177,6 +217,16 @@ label:focus {
 
 #clock {
   color: @yellow;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+#clock:hover {
+  background-color: @bg1;
+  color: @yellow;
+  border-radius: 4px;
+  margin: 3px 0;
 }
 
 #custom-separator {

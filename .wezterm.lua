@@ -171,7 +171,7 @@ config.keys = {
     action = wezterm.action.SplitVertical({ domain = 'CurrentPaneDomain' }),
   },
   {
-    key = '|',
+    key = '\\',
     mods = 'LEADER',
     action = wezterm.action.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
   },
