@@ -45,6 +45,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.pack.add({
+  { src = 'https://github.com/monkoose/neocodeium' },
+  { src = 'https://github.com/nvim-lua/plenary.nvim' },
   { src = 'https://github.com/Saghen/blink.cmp' },
   { src = 'https://github.com/catppuccin/nvim' },
   { src = 'https://github.com/ellisonleao/gruvbox.nvim' },
@@ -58,7 +60,6 @@ vim.pack.add({
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/stevearc/conform.nvim' },
   { src = 'https://github.com/stevearc/oil.nvim' },
-  { src = 'https://github.com/supermaven-inc/supermaven-nvim' },
   { src = 'https://github.com/tpope/vim-sleuth' },
   { src = 'https://github.com/zk-org/zk-nvim' },
 })
@@ -230,7 +231,9 @@ oil.setup({
 vim.keymap.set('n', '<leader>-', '<CMD>Oil<CR>')
 vim.keymap.set('n', '-', oil.toggle_float)
 
-require('supermaven-nvim').setup({})
+local neocodeium = require('neocodeium')
+neocodeium.setup()
+vim.keymap.set('i', '<A-f>', neocodeium.accept)
 
 require('mason').setup()
 
