@@ -5,6 +5,7 @@
 setopt PROMPT_SUBST
 NEWLINE=$'\n'
 PS1="${NEWLINE}${NEWLINE} %B%K{green}%F{black} %~ %f%k %F{green}>%f%b "
+export COLOR_SCHEME="catppuccin-mocha"
 
 if [[ "$COLOR_SCHEME" = "catppuccin-mocha" ]]; then
   PS1="${NEWLINE}${NEWLINE} %B%K{magenta}%F{black} %~ %f%k %F{magenta}>%f%b "
@@ -67,6 +68,56 @@ function newb {
   else
     echo "Usage: newb [branch type] [vc number] [branch description]"
   fi
+}
+
+function gwa {
+  if [[ $# -eq 2 ]]; then
+    repoName=$(basename $(git rev-parse --show-toplevel))
+    mainRepo=$(git rev-parse --show-toplevel)
+    worktreePath="../$repoName-$1"
+    echo "\n$: git worktree add $worktreePath $2\n"
+    git worktree add "$worktreePath" "$2"
+    if [[ -d ".claude" ]]; then
+      if [[ -d "$worktreePath/.claude" ]]; then
+        echo "\n$: rm -rf $worktreePath/.claude\n"
+        rm -rf "$worktreePath/.claude"
+      fi
+      echo "\n$: ln -s $mainRepo/.claude $worktreePath/.claude\n"
+      ln -s "$mainRepo/.claude" "$worktreePath/.claude"
+    fi
+    echo "\n$: cd $worktreePath\n"
+    cd "$worktreePath"
+  else
+    echo "Usage: gwa [worktree name] [branch]"
+  fi
+}
+
+function gwr {
+  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    currentPath=$(pwd)
+    mainWorktree=$(git worktree list --porcelain | grep -m1 "^worktree " | cut -d' ' -f2)
+    if [[ "$currentPath" == "$mainWorktree" ]]; then
+      echo "Already in main worktree, nothing to clean up"
+    else
+      echo "\n$: git reset --hard\n"
+      git reset --hard
+      echo "\n$: cd $mainWorktree\n"
+      cd "$mainWorktree"
+      echo "\n$: git worktree remove $currentPath\n"
+      git worktree remove "$currentPath"
+    fi
+  else
+    echo "Not in a git repository"
+  fi
+}
+
+function sc {
+  local sprite_name="${1:-$(sprite use)}"
+  local mount_point="/tmp/sprite-${sprite_name}"
+  mkdir -p "$mount_point"
+  sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 \
+    "sprite@${sprite_name}.sprites.dev:" "$mount_point"
+  cd "$mount_point"
 }
 
 alias pushu="git push -u origin HEAD" 
