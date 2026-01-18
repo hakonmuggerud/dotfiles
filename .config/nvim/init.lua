@@ -111,6 +111,7 @@ require('conform').setup({
     css = { 'prettierd' },
     json = { 'prettierd' },
     jsonc = { 'prettierd' },
+    python = { 'ruff' },
   },
   formatters = {
     ['sql-formatter'] = {
@@ -193,7 +194,7 @@ require('gitsigns').setup({
 })
 
 require('nvim-treesitter.configs').setup({
-  ensure_installed = {
+  Ensure_installed = {
     'bash',
     'graphql',
     'html',
@@ -206,6 +207,7 @@ require('nvim-treesitter.configs').setup({
     'rust',
     'tsx',
     'typescript',
+    'python',
     'vim',
     'vimdoc',
   },
@@ -232,7 +234,7 @@ vim.keymap.set('n', '<leader>-', '<CMD>Oil<CR>')
 vim.keymap.set('n', '-', oil.toggle_float)
 
 local neocodeium = require('neocodeium')
-neocodeium.setup()
+neocodeium.setup({ silent = true })
 vim.keymap.set('i', '<A-f>', neocodeium.accept)
 
 require('mason').setup()
@@ -281,6 +283,7 @@ vim.lsp.enable({
   'terraformls',
   'ts_ls',
   'hyprls',
+  'pyright',
 })
 
 require('status-line')
