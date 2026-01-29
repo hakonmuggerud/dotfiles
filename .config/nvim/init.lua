@@ -45,6 +45,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.pack.add({
+  { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
   { src = 'https://github.com/monkoose/neocodeium' },
   { src = 'https://github.com/nvim-lua/plenary.nvim' },
   { src = 'https://github.com/Saghen/blink.cmp' },
@@ -63,6 +64,10 @@ vim.pack.add({
   { src = 'https://github.com/tpope/vim-sleuth' },
   { src = 'https://github.com/zk-org/zk-nvim' },
 })
+
+local render_markdown = require('render-markdown')
+render_markdown.setup({})
+vim.keymap.set('n', '<leader>mt', render_markdown.toggle)
 
 require('blink.cmp').setup({
   keymap = { preset = 'default' },
