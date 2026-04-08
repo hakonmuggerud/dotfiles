@@ -1,0 +1,20 @@
+# Theme
+theme = Catppuccin Mocha
+
+# Font
+font-family = FiraMono Nerd Font
+font-family-italic = Maple Mono
+font-family-bold-italic = Maple Mono
+font-size = 16
+font-feature = -calt
+font-feature = -clig
+font-feature = -liga
+bold-is-bright = true
+
+# Window
+background-opacity = 0.96
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
