@@ -28,6 +28,8 @@ vim.opt.updatetime = 250
 vim.opt.winborder = 'rounded'
 vim.opt.wrap = false
 
+require('vim._core.ui2').enable({})
+
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
@@ -44,30 +46,29 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-vim.pack.add({
-  { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
-  { src = 'https://github.com/monkoose/neocodeium' },
-  { src = 'https://github.com/nvim-lua/plenary.nvim' },
-  { src = 'https://github.com/Saghen/blink.cmp' },
-  { src = 'https://github.com/catppuccin/nvim' },
-  { src = 'https://github.com/ellisonleao/gruvbox.nvim' },
-  { src = 'https://github.com/f-person/git-blame.nvim' },
-  { src = 'https://github.com/ibhagwan/fzf-lua' },
-  { src = 'https://github.com/lewis6991/gitsigns.nvim' },
-  { src = 'https://github.com/mason-org/mason.nvim' },
-  { src = 'https://github.com/mrjones2014/smart-splits.nvim' },
-  { src = 'https://github.com/neovim/nvim-lspconfig' },
-  { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-  { src = 'https://github.com/stevearc/conform.nvim' },
-  { src = 'https://github.com/stevearc/oil.nvim' },
-  { src = 'https://github.com/tpope/vim-sleuth' },
-  { src = 'https://github.com/zk-org/zk-nvim' },
-})
+local function gh(path)
+  return 'https://github.com/' .. path
+end
 
-local render_markdown = require('render-markdown')
-render_markdown.setup({})
-vim.keymap.set('n', '<leader>mt', render_markdown.toggle)
+vim.pack.add({
+  gh('Saghen/blink.cmp'),
+  gh('catppuccin/nvim'),
+  gh('coder/claudecode.nvim'),
+  gh('f-person/git-blame.nvim'),
+  gh('folke/snacks.nvim'),
+  gh('ibhagwan/fzf-lua'),
+  gh('lewis6991/gitsigns.nvim'),
+  gh('mason-org/mason.nvim'),
+  gh('mrjones2014/smart-splits.nvim'),
+  gh('neovim/nvim-lspconfig'),
+  gh('nvim-lua/plenary.nvim'),
+  gh('nvim-tree/nvim-web-devicons'),
+  gh('nvim-treesitter/nvim-treesitter'),
+  gh('stevearc/conform.nvim'),
+  gh('stevearc/oil.nvim'),
+  gh('tpope/vim-sleuth'),
+  gh('zk-org/zk-nvim'),
+})
 
 require('blink.cmp').setup({
   keymap = { preset = 'default' },
@@ -89,9 +90,6 @@ require('blink.cmp').setup({
   signature = { enabled = true },
 })
 
-require('gruvbox').setup({
-  transparent_mode = true,
-})
 require('catppuccin').setup({
   flavor = 'mocha',
   integrations = {
@@ -99,10 +97,29 @@ require('catppuccin').setup({
   },
 })
 
-local color_scheme_env = os.getenv('COLOR_SCHEME')
-print(color_scheme_env)
+vim.cmd('colorscheme catppuccin-mocha')
 
-vim.cmd('colorscheme ' .. (color_scheme_env or 'catppuccin-mocha'))
+require('snacks').setup({
+  terminal = {
+    enabled = true,
+  },
+})
+vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-w>h', { silent = true })
+vim.keymap.set('t', '<C-j>', '<C-\\><C-n><C-w>j', { silent = true })
+vim.keymap.set('t', '<C-k>', '<C-\\><C-n><C-w>k', { silent = true })
+vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-w>l', { silent = true })
+
+require('claudecode').setup({
+  terminal = {
+    provider = 'snacks',
+  },
+})
+vim.keymap.set('n', '<leader>co', '<cmd>ClaudeCode<cr>', { desc = 'Toggle Claude' })
+vim.keymap.set('n', '<leader>cf', '<cmd>ClaudeCodeFocus<cr>', { desc = 'Focus Claude' })
+vim.keymap.set('n', '<leader>cr', '<cmd>ClaudeCode --resume<cr>', { desc = 'Resume Claude' })
+vim.keymap.set('n', '<leader>cc', '<cmd>ClaudeCode --continue<cr>', { desc = 'Continue Claude' })
+vim.keymap.set('n', '<leader>ca', '<cmd>ClaudeCodeAdd %<cr>', { desc = 'Add current buffer' })
+vim.keymap.set('v', '<leader>cs', '<cmd>ClaudeCodeSend<cr>', { desc = 'Send to Claude' })
 
 require('conform').setup({
   formatters_by_ft = {
@@ -238,10 +255,6 @@ oil.setup({
 vim.keymap.set('n', '<leader>-', '<CMD>Oil<CR>')
 vim.keymap.set('n', '-', oil.toggle_float)
 
-local neocodeium = require('neocodeium')
-neocodeium.setup({ silent = true })
-vim.keymap.set('i', '<A-f>', neocodeium.accept)
-
 require('mason').setup()
 
 local smart_splits = require('smart-splits')
@@ -266,7 +279,7 @@ vim.keymap.set('v', '<leader>zf', ":'<,'>ZkMatch<CR>")
 vim.keymap.set('n', '<leader>zz', zk_utils.add_task)
 vim.keymap.set('n', '<leader>zc', zk_utils.toggle_checkbox)
 
-vim.keymap.set('n', '<leader>co', '<cmd>GitBlameOpenCommitURL<cr>', { desc = 'Open commit url' })
+vim.keymap.set('n', '<leader>go', '<cmd>GitBlameOpenCommitURL<cr>', { desc = 'Open commit url' })
 
 vim.lsp.config('lua_ls', {
   settings = {
