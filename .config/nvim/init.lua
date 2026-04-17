@@ -51,6 +51,7 @@ local function gh(path)
 end
 
 vim.pack.add({
+  { src = gh('nvim-treesitter/nvim-treesitter'), version = 'main' },
   gh('Saghen/blink.cmp'),
   gh('catppuccin/nvim'),
   gh('coder/claudecode.nvim'),
@@ -63,7 +64,6 @@ vim.pack.add({
   gh('neovim/nvim-lspconfig'),
   gh('nvim-lua/plenary.nvim'),
   gh('nvim-tree/nvim-web-devicons'),
-  gh('nvim-treesitter/nvim-treesitter'),
   gh('stevearc/conform.nvim'),
   gh('stevearc/oil.nvim'),
   gh('tpope/vim-sleuth'),
@@ -215,29 +215,17 @@ require('gitsigns').setup({
   end,
 })
 
-require('nvim-treesitter.configs').setup({
-  Ensure_installed = {
-    'bash',
-    'graphql',
-    'html',
-    'javascript',
-    'lua',
-    'markdown',
-    'markdown_inline',
-    'python',
-    'regex',
-    'rust',
-    'tsx',
-    'typescript',
-    'python',
-    'vim',
-    'vimdoc',
-  },
-  auto_install = true,
-  highlight = {
-    enable = true,
-  },
-  indent = { enable = true },
+require('nvim-treesitter').install({
+  'bash',
+  'graphql',
+  'html',
+  'javascript',
+  'python',
+  'regex',
+  'rust',
+  'tsx',
+  'typescript',
+  'lua',
 })
 
 local oil = require('oil')

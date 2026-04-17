@@ -70,60 +70,9 @@ function newb {
   fi
 }
 
-function gwa {
-  if [[ $# -eq 2 ]]; then
-    repoName=$(basename $(git rev-parse --show-toplevel))
-    mainRepo=$(git rev-parse --show-toplevel)
-    worktreePath="../$repoName-$1"
-    echo "\n$: git worktree add $worktreePath $2\n"
-    git worktree add "$worktreePath" "$2"
-    if [[ -d ".claude" ]]; then
-      if [[ -d "$worktreePath/.claude" ]]; then
-        echo "\n$: rm -rf $worktreePath/.claude\n"
-        rm -rf "$worktreePath/.claude"
-      fi
-      echo "\n$: ln -s $mainRepo/.claude $worktreePath/.claude\n"
-      ln -s "$mainRepo/.claude" "$worktreePath/.claude"
-    fi
-    echo "\n$: cd $worktreePath\n"
-    cd "$worktreePath"
-  else
-    echo "Usage: gwa [worktree name] [branch]"
-  fi
-}
-
-function gwr {
-  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-    currentPath=$(pwd)
-    mainWorktree=$(git worktree list --porcelain | grep -m1 "^worktree " | cut -d' ' -f2)
-    if [[ "$currentPath" == "$mainWorktree" ]]; then
-      echo "Already in main worktree, nothing to clean up"
-    else
-      echo "\n$: git reset --hard\n"
-      git reset --hard
-      echo "\n$: cd $mainWorktree\n"
-      cd "$mainWorktree"
-      echo "\n$: git worktree remove $currentPath\n"
-      git worktree remove "$currentPath"
-    fi
-  else
-    echo "Not in a git repository"
-  fi
-}
-
-function sc {
-  local sprite_name="${1:-$(sprite use)}"
-  local mount_point="/tmp/sprite-${sprite_name}"
-  mkdir -p "$mount_point"
-  sshfs -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 \
-    "sprite@${sprite_name}.sprites.dev:" "$mount_point"
-  cd "$mount_point"
-}
-
 alias pushu="git push -u origin HEAD" 
 alias glog="git log --oneline "
 alias gs="git status -sb"
-alias gq="git checkout staging"
 alias kb="kubectl"
 alias kx="kubectx"
 
@@ -182,15 +131,6 @@ fi
 
 eval "$(fzf --zsh)"
 
-function fzf_search_specific_dirs {
-  local selected_dir
-  selected_dir=$(find ~/repos ~/repos/rust-beginnings -maxdepth 1 -type d | fzf)
-
-  if [[ -n $selected_dir ]]; then
-    cd "$selected_dir" || return
-  fi
-}
-
 function fzf_search_git_branches {
   local selected_branch
   selected_branch=$(git branch --sort=-committerdate | fzf | tr -d ' ')
@@ -201,7 +141,7 @@ function fzf_search_git_branches {
   fi
 }
 
-bindkey -s ^f "fzf_search_specific_dirs\n"
+bindkey -s ^f "tmux-sessionizer"
 bindkey -s ^b "fzf_search_git_branches\n"
 bindkey "^q" end-of-line
 

@@ -37,6 +37,7 @@ yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="DBeaver" title="Connect*" manage=off
+yabai -m rule --add app="RuneLite" manage=off
 
 # borders active_color=0xffb4befe 	\
 # 	inactive_color=0xff6c7086 	\

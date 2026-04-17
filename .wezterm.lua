@@ -42,8 +42,8 @@ local themes = {
       tab_bar = {
         background = '#1e1e2e',
         active_tab = {
-          bg = '#f5c2e7',
-          fg = '#111111',
+          bg_color = '#f5c2e7',
+          fg_color = '#111111',
         },
       },
     },
@@ -59,11 +59,11 @@ local themes = {
           fg_color = '#111111',
         },
       },
-    }
+    },
   },
 }
 
-local theme = themes[2]
+local theme = themes[1]
 
 config.color_scheme = theme.color_scheme
 config.window_background_opacity = 0.96
@@ -74,7 +74,7 @@ config.colors = theme.colors
 
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 config.font_size = theme.font_size
-config.font = wezterm.font({ family = theme.font_family });
+config.font = wezterm.font({ family = theme.font_family })
 config.bold_brightens_ansi_colors = true
 config.font_rules = {
   {
@@ -125,6 +125,11 @@ config.keys = {
     key = '3',
     mods = 'LEADER',
     action = wezterm.action.SwitchToWorkspace({ name = 'notes' }),
+  },
+  {
+    key = '4',
+    mods = 'LEADER',
+    action = wezterm.action.SwitchToWorkspace({ name = 'claude' }),
   },
   {
     key = 'n',
