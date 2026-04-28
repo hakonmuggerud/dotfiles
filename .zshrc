@@ -10,9 +10,6 @@ export COLOR_SCHEME="catppuccin-mocha"
 if [[ "$COLOR_SCHEME" = "catppuccin-mocha" ]]; then
   PS1="${NEWLINE}${NEWLINE} %B%K{magenta}%F{black} %~ %f%k %F{magenta}>%f%b "
 fi
-if [[ "$COLOR_SCHEME" = "gruvbox" ]]; then
-  PS1="${NEWLINE}${NEWLINE} %B%K{white}%F{black} %~ %f%k %F{white}>%f%b "
-fi
 
 
 # =============================
@@ -31,7 +28,8 @@ export AWS_PROFILE=non-prod
 export AWS_DEFAULT_PROFILE=non-prod
 export EDITOR=nvim
 export BAT_THEME="$THEME"
-export ZK_NOTEBOOK_DIR="$HOME/notes"
+export REPOS_DIR="$HOME/repos"
+export ZK_NOTEBOOK_DIR="$REPOS_DIR/notes"
 
 export HISTFILE=~/.zsh_history
 export HISTSIZE=500000
@@ -101,13 +99,6 @@ if [[ ! -d $ZPLUGINDIR/zsh-syntax-highlighting ]]; then
 fi
 source $ZPLUGINDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-if [[ ! -d $ZPLUGINDIR/zsh-autopair ]]; then
-  git clone https://github.com/hlissner/zsh-autopair $ZPLUGINDIR/zsh-autopair
-fi
-source $ZPLUGINDIR/zsh-autopair/autopair.zsh
-autopair-init
-
-
 # =============================
 # super important scripts
 # =============================
@@ -141,7 +132,7 @@ function fzf_search_git_branches {
   fi
 }
 
-bindkey -s ^f "tmux-sessionizer"
+bindkey -s ^f "tms"
 bindkey -s ^b "fzf_search_git_branches\n"
 bindkey "^q" end-of-line
 
