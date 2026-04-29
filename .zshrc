@@ -77,7 +77,6 @@ alias kx="kubectx"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dot=dotfiles
 
-#alias bat="batcat"
 alias cat="bat"
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --group-directories-first"
 
@@ -111,7 +110,7 @@ if command -v kubectl &> /dev/null; then
   source <(kubectl completion zsh)
 fi
 
-  # =============================
+# =============================
 # fzf configuration
 # =============================
 if [[ -d "$HOME/.fzf/bin" ]]; then
@@ -135,7 +134,3 @@ function fzf_search_git_branches {
 bindkey -s ^f "tms"
 bindkey -s ^b "fzf_search_git_branches\n"
 bindkey "^q" end-of-line
-
-if [[ "$(tty)" = "/dev/tty1" ]]; then
-  exec startx
-fi

@@ -51,7 +51,7 @@ local function gh(path)
 end
 
 vim.pack.add({
-  { src = gh('nvim-treesitter/nvim-treesitter'), version = 'main' },
+  gh('romus204/tree-sitter-manager.nvim'),
   gh('Saghen/blink.cmp'),
   gh('catppuccin/nvim'),
   gh('coder/claudecode.nvim'),
@@ -69,6 +69,8 @@ vim.pack.add({
   gh('tpope/vim-sleuth'),
   gh('zk-org/zk-nvim'),
 })
+
+require("tree-sitter-manager").setup({})
 
 require('blink.cmp').setup({
   keymap = { preset = 'default' },
@@ -213,19 +215,6 @@ require('gitsigns').setup({
       return '<Ignore>'
     end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
   end,
-})
-
-require('nvim-treesitter').install({
-  'bash',
-  'graphql',
-  'html',
-  'javascript',
-  'python',
-  'regex',
-  'rust',
-  'tsx',
-  'typescript',
-  'lua',
 })
 
 local oil = require('oil')
